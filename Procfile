@@ -1,0 +1,1 @@
+web: gunicorn spotify_oauth_app.app:app
