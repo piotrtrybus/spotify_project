@@ -28,6 +28,10 @@ def profile():
     profile_data = get_user_profile(session['access_token'])
     return profile_data
 
+@spotify_oauth_blueprint.route('/')
+def index():
+    return 'Spotify OAuth app is running.'
+
 app = Flask(__name__)
 app.secret_key = os.getenv("FLASK_SECRET_KEY", "dev-key")
 app.register_blueprint(spotify_oauth_blueprint)
