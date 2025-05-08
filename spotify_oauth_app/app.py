@@ -1,15 +1,14 @@
-# spotify_oauth_app/app.py
-
-from flask import Blueprint, redirect, request, session, url_for
+import os
+from flask import Flask, Blueprint, redirect, request, session, url_for
 from .oauth_utils import get_auth_url, exchange_code_for_token, get_user_profile
 
 spotify_oauth_blueprint = Blueprint('spotify_oauth_app', __name__)
 
-@app.route('/login')
+@spotify_oauth_blueprint.route('/login')
 def login():
     return redirect(get_auth_url())
 
-@app.route('/callback')
+@spotify_oauth_blueprint.route('/callback')
 def callback():
     code = request.args.get('code')
     if not code:
@@ -21,7 +20,7 @@ def callback():
         return redirect(url_for('spotify_oauth_app.profile'))
     return "Error: Unable to retrieve access token", 400
 
-@app.route('/profile')
+@spotify_oauth_blueprint.route('/profile')
 def profile():
     if 'access_token' not in session:
         return redirect(url_for('spotify_oauth_app.login'))
