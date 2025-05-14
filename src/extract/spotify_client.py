@@ -1,4 +1,13 @@
 import requests
+import sys
+import os
+
+# Add the parent directory of the current file to the sys.path
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
+
+from spotify_oauth_app.oauth_utils import get_user_profile, get_access_token,get_auth_url
+
+access_token = get_access_token()
 
 def get_current_playing_track(access_token):
     url = "https://api.spotify.com/v1/me/player/currently-playing"
@@ -11,5 +20,3 @@ def get_current_playing_track(access_token):
     return response.json()
 
 
-response = get_current_playing_track(access_token)
-print(response)

@@ -35,3 +35,12 @@ def index():
 app = Flask(__name__)
 app.secret_key = os.getenv("FLASK_SECRET_KEY", "dev-key")
 app.register_blueprint(spotify_oauth_blueprint)
+
+@spotify_oauth_blueprint.route('/current-track')
+def current_track():
+    if 'access_token' not in session:
+        return redirect(url_for('spotify_oauth_app.login'))  # Re-auth if not logged in
+    
+    access_token = session['access_token']
+    data = get_current_playing_track(access_token)
+    return data

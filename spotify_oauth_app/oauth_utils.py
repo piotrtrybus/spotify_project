@@ -16,7 +16,8 @@ def get_auth_url():
     return (
         "https://accounts.spotify.com/authorize?"
         f"client_id={SPOTIFY_CLIENT_ID}&response_type=code"
-        f"&redirect_uri={SPOTIFY_REDIRECT_URI}&scope=user-read-private user-read-email"
+        f"&redirect_uri={SPOTIFY_REDIRECT_URI}"
+        f"&scope=user-read-private"
     )
 
 # Exchange the authorization code for an access token
